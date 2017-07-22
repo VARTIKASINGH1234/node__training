@@ -1,0 +1,14 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const Controller = require('./controller');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+const port = process.env.PORT || 8081;
+console.log('REST API is runnning at ' + port);
+app.get('/clients', Controller.getClient);
+app.get('/clients/:clientId', Controller.getClientId);
+app.post('/clients', Controller.createClient);
+app.delete('/clients/:clientId', Controller.deleteClient);
+app.get('/clients/:clientId/lists', Controller.getLists);
+app.listen(port);
